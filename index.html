@@ -1,0 +1,2626 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Atelier Noona &amp; Le Petit Bouillon — Boulangerie, P&acirc;tisserie &amp; Brasserie au Cannet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#C8A97E">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
+<meta name="description" content="Atelier Noona &amp; Le Petit Bouillon — Boulangerie artisanale, p&acirc;tisserie fine &amp; cuisine populaire par Chef Abel Bayili, Toque Blanche International. 42 chemin de l'Aubar&egrave;de, Le Cannet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — Atelier Noona & Le Petit Bouillon
+   ============================================================ */
+:root {
+  --noona: #C8A97E;
+  --noona-50: #FDF8F0;
+  --noona-100: #F5EBD8;
+  --noona-200: #E8D5B2;
+  --noona-400: #D4B88A;
+  --noona-600: #A68A5B;
+  --noona-800: #7A6340;
+  --noona-900: #3D2B1F;
+
+  --rainbow-red: #FF4D2E;
+  --rainbow-orange: #FF8A1F;
+  --rainbow-yellow: #FFD400;
+  --rainbow-green: #00D26A;
+  --rainbow-blue: #0066FF;
+  --rainbow-pink: #FF2D87;
+  --rainbow-violet: #6E3CFF;
+
+  --ink: #0A0A0A;
+  --ink-90: #1A1A1A;
+  --ink-80: #2B2B2B;
+  --ink-60: #4A4A4A;
+  --ink-40: #767676;
+  --ink-30: #9B9B9B;
+  --ink-20: #C6C6C6;
+  --ink-10: #E5E5E5;
+  --ink-05: #F2F2F2;
+  --paper: #FFFFFF;
+  --paper-warm: #FFFAF3;
+
+  --font-display: 'Space Grotesk', 'SF Pro Display', system-ui, sans-serif;
+  --font-body: 'Geist', 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-md: 17px;
+  --fs-lg: 21px;
+  --fs-xl: 26px;
+  --fs-2xl: 33px;
+  --fs-3xl: 42px;
+  --fs-4xl: 56px;
+  --fs-5xl: clamp(64px, 7vw, 88px);
+
+  --tracking-tight: -0.025em;
+  --tracking-snug: -0.01em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+  --leading-display: 1.02;
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-base: 1.55;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+  --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-14: 56px; --s-20: 80px;
+  --container: 1280px;
+
+  --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-card: 14px;
+  --r-lg: 20px; --r-xl: 28px; --r-2xl: 40px; --r-full: 9999px;
+
+  --shadow-pop: 4px 4px 0 0 var(--ink);
+  --shadow-pop-noona: 4px 4px 0 0 var(--noona);
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --d-fast: 120ms;
+  --d-base: 220ms;
+  --d-slow: 420ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; }
+::selection { background: var(--noona-200); color: var(--noona-900); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(61,43,31,0.55) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Aurora depth shapes */
+.aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora-band {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform;
+  background: rgba(200,169,126,0.08);
+}
+.ab-1 {
+  width: 700px; height: 400px;
+  opacity: 0.8;
+  top: -15%; left: -5%;
+  animation: auroraDrift1 20s ease-in-out infinite;
+}
+.ab-2 {
+  width: 500px; height: 350px;
+  opacity: 0.5;
+  top: 25%; right: -8%;
+  animation: auroraDrift2 26s ease-in-out infinite;
+}
+.ab-3 {
+  width: 400px; height: 300px;
+  opacity: 0.4;
+  bottom: 5%; left: 30%;
+  animation: auroraDrift3 18s ease-in-out infinite;
+}
+@keyframes auroraDrift1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(100px, 50px) rotate(5deg) scale(1.1); }
+  66% { transform: translate(-50px, 80px) rotate(-3deg) scale(0.95); }
+}
+@keyframes auroraDrift2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-80px, 40px) rotate(-4deg); }
+  66% { transform: translate(60px, -30px) rotate(3deg); }
+}
+@keyframes auroraDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(80px, -40px) scale(1.15); }
+}
+
+/* Noise overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* ═══════ NAV ═══════ */
+.hero-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 48px;
+  position: relative;
+  z-index: 60;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-butterfly {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  filter: drop-shadow(0 2px 8px rgba(255,255,255,0.3));
+}
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.logo-text span {
+  color: var(--noona);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+  padding: 4px 0;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: #fff;
+  transition: width 0.3s var(--ease);
+}
+.nav-link:hover,
+.nav-link:focus-visible { color: #fff; }
+.nav-link:hover::after { width: 100%; }
+.nav-cta {
+  background: #fff;
+  color: var(--noona);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: var(--r-full);
+  text-decoration: none;
+  border: 2.5px solid #fff;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  box-shadow: 3px 3px 0 0 var(--noona-900);
+}
+.nav-cta:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 0 var(--noona-900); }
+
+/* ═══════ HERO MAIN ═══════ */
+.hero-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px 40px;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+}
+.hero-content::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 52px;
+  bottom: 60px;
+  width: 3px;
+  border-radius: var(--r-full);
+  background: linear-gradient(180deg, transparent, var(--noona), rgba(255,255,255,0.34), transparent);
+  opacity: 0.82;
+}
+.hero-content::after {
+  content: '';
+  position: absolute;
+  left: -72px; top: 14%;
+  width: 320px; height: 320px;
+  border-radius: var(--r-full);
+  background: radial-gradient(circle, rgba(200,169,126,0.22), rgba(255,255,255,0.06) 34%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Eyebrow */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: var(--r-full);
+  padding: 7px 8px 7px 10px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 14px 42px rgba(61,43,31,0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  transform: translateY(12px);
+}
+.eyebrow-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--rainbow-green);
+  box-shadow: 0 0 8px rgba(0,210,106,0.6);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.eyebrow-live {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  background: var(--paper);
+  color: var(--noona);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Headline */
+.payoff {
+  font-family: var(--font-display);
+  font-size: clamp(58px, 6.4vw, 92px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.9;
+  margin: 0 0 22px;
+  padding-bottom: 0.1em;
+  position: relative;
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(20px);
+}
+.payoff span,
+.payoff strong,
+.payoff em {
+  display: block;
+  font-style: normal;
+}
+.payoff span {
+  color: rgba(255,255,255,0.74);
+  font-size: 0.42em;
+  line-height: 1.1;
+  font-weight: 650;
+  margin-bottom: 6px;
+}
+.payoff strong {
+  color: var(--noona);
+  font-size: 1em;
+  line-height: 0.9;
+  white-space: normal;
+  max-width: 10ch;
+  padding-bottom: 0.12em;
+}
+.payoff em {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 18px;
+  padding: 7px 14px 8px;
+  border: 2px solid var(--paper);
+  border-radius: var(--r-full);
+  color: var(--paper);
+  font-size: 0.2em;
+  line-height: 1.1;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 0 var(--noona-900);
+  background: rgba(255,255,255,0.10);
+  -webkit-text-fill-color: var(--paper);
+}
+.payoff::after {
+  content: '';
+  position: absolute;
+  width: 70%; height: 50%;
+  bottom: -15%; left: 0;
+  background: var(--noona);
+  filter: blur(100px);
+  opacity: 0;
+  z-index: -1;
+}
+.payoff.shimmer strong {
+  animation: shimmer 14s linear infinite;
+  background-size: 300% 100%;
+  background-image: linear-gradient(91deg,
+    var(--noona) 0%, var(--paper) 15%,
+    var(--noona) 30%, var(--paper) 50%,
+    var(--noona) 70%, var(--paper) 85%,
+    var(--noona) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+
+/* Sub */
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.58;
+  color: rgba(255,255,255,0.76);
+  max-width: 520px;
+  margin: 0 0 24px;
+  text-wrap: pretty;
+  opacity: 0;
+  transform: translateY(12px);
+}
+.hero-sub strong { color: var(--paper); font-weight: 600; }
+
+/* Proof */
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(12px);
+}
+.hero-proof-text {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.76);
+  line-height: 1.2;
+}
+.hero-proof-text strong,
+.hero-proof-text span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: var(--r-full);
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.84);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.hero-proof-text strong {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--noona);
+  box-shadow: 3px 3px 0 0 var(--noona-900);
+}
+
+/* Headline */
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.5vw, 80px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 20px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 4px 24px rgba(0,0,0,0.5), 0 8px 60px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: #fff;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.5), 0 8px 50px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* CTAs */
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(16px);
+  justify-content: center;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  min-height: 48px;
+  padding: 10px 20px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  background: var(--paper);
+  color: var(--noona);
+  border: 2.5px solid var(--paper);
+  box-shadow: 4px 4px 0 0 var(--noona-900);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 0 var(--noona-900); }
+.btn-primary:active { transform: translate(1px,1px); box-shadow: 2px 2px 0 0 var(--noona-900); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-primary small {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--noona);
+  color: var(--noona-900);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  min-height: 48px;
+  padding: 10px 20px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: var(--paper);
+  border: 2.5px solid rgba(255,255,255,0.3);
+  box-shadow: 4px 4px 0 0 rgba(0,0,0,0.15);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.15s var(--ease);
+  text-decoration: none;
+}
+.btn-ghost:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 0 rgba(0,0,0,0.2); background: rgba(255,255,255,0.15); }
+.btn-ghost:active { transform: translate(1px,1px); box-shadow: 2px 2px 0 0 rgba(0,0,0,0.1); }
+
+/* ═══════ RIGHT: BUTTERFLY + ORBIT ═══════ */
+.hero-right {
+  position: relative;
+  width: min(42vw, 560px);
+  flex: 0 0 min(42vw, 560px);
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  transform: translateX(-14px);
+}
+.hero-right::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(360px, 34vw, 560px);
+  height: clamp(360px, 34vw, 560px);
+  transform: translate(-50%, -50%);
+  border-radius: var(--r-full);
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.08) 32%, transparent 68%),
+    conic-gradient(from 90deg, rgba(200,169,126,0.22), rgba(166,138,91,0.16), rgba(122,99,64,0.16), rgba(200,169,126,0.22), rgba(200,169,126,0.22));
+  filter: blur(20px);
+  opacity: 0.58;
+  animation: fieldBreathe 8s var(--ease) infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-right::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(300px, 27vw, 420px);
+  height: clamp(320px, 30vw, 460px);
+  transform: translate(-50%, -50%) rotate(-3deg);
+  border-radius: var(--r-2xl);
+  border: 2px solid rgba(255,255,255,0.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
+    radial-gradient(circle at 50% 32%, rgba(200,169,126,0.12), transparent 48%);
+  box-shadow: 10px 10px 0 0 rgba(61,43,31,0.28), inset 0 1px 0 rgba(255,255,255,0.24);
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes fieldBreathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.94) rotate(0deg); opacity: 0.55; }
+  50% { transform: translate(-50%, -50%) scale(1.04) rotate(18deg); opacity: 0.82; }
+}
+
+/* Butterfly mascot */
+.butterfly-wrapper {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.butterfly-wrapper::before,
+.butterfly-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(210px, 21vw, 320px);
+  height: clamp(210px, 21vw, 320px);
+  border-radius: var(--r-full);
+  border: 1.5px solid rgba(255,255,255,0.26);
+  transform: translate(-50%, -50%) scale(0.78);
+  opacity: 0;
+  animation: butterflyPulse 4.8s var(--ease) infinite;
+  pointer-events: none;
+}
+.butterfly-wrapper::after {
+  width: clamp(260px, 25vw, 380px);
+  height: clamp(260px, 25vw, 380px);
+  border-color: rgba(200,169,126,0.24);
+  animation-delay: 1.4s;
+}
+@keyframes butterflyPulse {
+  0% { transform: translate(-50%, -50%) scale(0.72); opacity: 0; }
+  18% { opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) scale(1.18); opacity: 0; }
+}
+.hero-butterfly {
+  width: clamp(210px, 20vw, 310px);
+  filter: drop-shadow(0 12px 40px rgba(255,255,255,0.16)) drop-shadow(0 0 34px rgba(200,169,126,0.16));
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+/* Orbit paths */
+.orbit-paths {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(470px, 38vw, 650px);
+  height: clamp(470px, 38vw, 650px);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+.orbit-paths.revealed {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+.orbit-path {
+  fill: none;
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 18;
+}
+.orbit-path.ring-0 { animation: orbitDash 54s linear infinite; }
+.orbit-path.ring-1 { animation: orbitDash 62s linear infinite; }
+.orbit-path.ring-2 { animation: orbitDash 72s linear infinite; animation-delay: -8s; }
+@keyframes orbitDash {
+  to { stroke-dashoffset: -36; }
+}
+
+/* Orbit container + product tags */
+.orbit-container {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  z-index: 7;
+  pointer-events: none;
+}
+.product-tag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: var(--r-full);
+  background: var(--paper);
+  border: 2px solid var(--tc, #fff);
+  box-shadow: 3px 3px 0 0 var(--tc, var(--noona-900));
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ink);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  scale: 0.5;
+  transform-origin: center center;
+  transition: box-shadow 0.15s var(--ease);
+}
+.product-tag[data-ring="1"] {
+  padding: 7px 11px;
+  font-size: 10px;
+  box-shadow: 2.5px 2.5px 0 0 var(--tc, var(--noona-900));
+}
+.product-tag[data-ring="2"] {
+  padding: 6px 10px;
+  font-size: 9px;
+  box-shadow: 2px 2px 0 0 var(--tc, var(--noona-900));
+}
+.product-tag::after {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: var(--r-full);
+  background: var(--tc, var(--noona));
+  opacity: 0.72;
+}
+.product-tag.revealed {
+  opacity: var(--tag-opacity, 1) !important;
+  transform: translate(-50%, -50%) scale(var(--tag-scale, 1)) !important;
+}
+.product-tag:hover {
+  box-shadow: 5px 5px 0 0 var(--tc, var(--noona-900));
+  z-index: 20 !important;
+}
+.tag-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--tc, var(--noona));
+}
+.tag-icon svg { width: 12px; height: 12px; }
+
+/* ═══════ TICKER ═══════ */
+.hero-ticker {
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(200,169,126,0.15) 0%, rgba(255,255,255,0.06) 50%, rgba(200,169,126,0.1) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.hero-ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 14px 0;
+  animation: tickerScroll 32s linear infinite;
+}
+.hero-ticker-track.reverse {
+  animation: tickerScrollReverse 28s linear infinite;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes tickerScrollReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.ticker-item {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 0 6px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.ticker-sep {
+  padding: 0 12px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  font-size: 8px;
+  color: var(--noona);
+}
+.ticker-highlight {
+  color: #fff;
+  background: var(--noona);
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  margin: 0 4px;
+}
+.ticker-item-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 0 6px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  color: var(--noona);
+}
+
+/* ═══════ PROOF BAR ═══════ */
+.hero-proof-bar {
+  padding: 16px 48px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 36px;
+  background: var(--noona-900);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  opacity: 0;
+}
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+.proof-value {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(255,255,255,0.9);
+}
+.proof-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.12); }
+
+/* ═══════ REVEAL ═══════ */
+.reveal {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), scale 0.7s var(--ease);
+}
+.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  scale: 1 !important;
+}
+.payoff.revealed::after { opacity: 0.08; transition: opacity 1.5s var(--ease) 0.3s; }
+
+/* ═══════ SECTIONS AFTER HERO ═══════ */
+
+/* Brands section */
+.brands-section {
+  padding: 40px 48px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink-05);
+}
+.brands-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.brands-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-30);
+  white-space: nowrap;
+}
+.brands-list {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brands-list a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border: 2px solid var(--ink-10);
+  border-radius: var(--r-full);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), border-color 0.15s;
+}
+.brands-list a:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-pop-noona);
+  border-color: var(--noona-200);
+  color: var(--noona);
+}
+
+/* Categories section */
+/* ═══════ SERVICES COLUMNS ═══════ */
+.services-cols {
+  background: var(--ink);
+  padding: 0;
+  overflow: hidden;
+}
+.services-cols-header {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) 48px 0;
+}
+.services-cols-header .section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.services-cols-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--paper);
+  margin: 0;
+}
+.services-cols-header h2 span { color: var(--noona); }
+
+.svc-grid {
+  display: flex;
+  gap: 0;
+  min-height: clamp(400px, 55vh, 560px);
+  padding: clamp(24px, 3vw, 48px);
+}
+.svc-col {
+  position: relative;
+  flex: 1 1 0%;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  margin: 0 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: flex-grow 0.5s var(--ease);
+  text-decoration: none;
+}
+.svc-col:hover { flex-grow: 1.8; }
+
+.svc-col-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.svc-col-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.svc-col:hover .svc-col-image img { transform: scale(1.06); }
+
+.svc-col::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.svc-col-info {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.svc-col-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  border: 2px solid var(--tc, var(--noona));
+  color: var(--tc, var(--noona));
+  background: transparent;
+  margin-bottom: 8px;
+  display: inline-block;
+  transition: background 0.3s, color 0.3s;
+}
+.svc-col:hover .svc-col-tag {
+  background: var(--tc, var(--noona));
+  color: var(--ink);
+  box-shadow: var(--shadow-pop);
+}
+.svc-col-name {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.svc-col-desc {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.svc-col-arrow {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.svc-col-arrow svg { width: 16px; height: 16px; color: var(--paper); }
+.svc-col:hover .svc-col-arrow {
+  background: var(--noona);
+  border-color: var(--noona);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-pop-noona);
+}
+.svc-col:hover .svc-col-arrow svg { color: var(--paper); }
+
+/* Products section */
+/* ═══════ PRODUCTS ═══════ */
+.products-section {
+  padding: 100px 48px;
+  background: var(--paper);
+  position: relative;
+}
+.products-section .section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.products-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+.products-section .section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.products-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  margin: 0;
+}
+.products-section h2 span { color: var(--noona); }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.product-card {
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  overflow: hidden;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  border: 2px solid var(--ink-05);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 0 0 2px var(--noona-200);
+  border-color: var(--noona-200);
+}
+.product-card .product-img {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+.product-card .product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+.product-card:hover .product-img img {
+  transform: scale(1.06);
+}
+.product-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.product-badge.badge-promo {
+  background: var(--noona);
+  color: #fff;
+}
+.product-badge.badge-new {
+  background: var(--ink);
+  color: #fff;
+}
+.product-quick {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  padding: 12px;
+  border-radius: var(--r-lg);
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  z-index: 2;
+  border: none;
+  cursor: pointer;
+}
+.product-card:hover .product-quick {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-quick:hover {
+  background: var(--noona);
+}
+.product-card .product-info {
+  padding: 20px 20px 24px;
+}
+.product-card .product-brand {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  margin-bottom: 6px;
+}
+.product-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.product-card .product-price {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--noona);
+}
+.product-card .product-price-old {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--ink-30);
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+/* Blog section */
+/* ═══════ BLOG / MAGAZINE ═══════ */
+.blog-section {
+  padding: 100px 48px;
+  background: var(--paper-warm);
+}
+.blog-section .section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.blog-section .section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--ink-40);
+  margin-bottom: 16px;
+}
+.blog-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  margin: 0 0 56px;
+}
+.blog-section h2 span { color: var(--noona); }
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(30px);
+  border: 2px solid var(--ink-05);
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: var(--noona-200);
+}
+.blog-card .blog-cover {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+.blog-card .blog-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.blog-card:hover .blog-cover img {
+  transform: scale(1.05);
+}
+.blog-card .blog-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 5px 14px;
+  border-radius: var(--r-full);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--noona);
+  color: #fff;
+  z-index: 2;
+}
+.blog-card .blog-read-time {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.blog-card .blog-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.blog-card .blog-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  margin-bottom: 10px;
+}
+.blog-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.blog-card p {
+  font-size: var(--fs-sm);
+  color: var(--ink-50);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  flex: 1;
+}
+.blog-card .blog-read-link {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--noona);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s var(--ease);
+}
+.blog-card:hover .blog-read-link { gap: 12px; }
+/* Featured (first card: image covers most of the card) */
+.blog-card.blog-featured {
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.blog-card.blog-featured .blog-cover {
+  height: 100%;
+  min-height: 300px;
+}
+.blog-card.blog-featured .blog-content {
+  padding: 28px;
+}
+.blog-card.blog-featured h3 {
+  font-size: var(--fs-xl);
+}
+.blog-card.blog-featured p {
+  font-size: var(--fs-sm);
+}
+
+/* Promo banner */
+.promo-banner {
+  padding: 48px;
+  background: linear-gradient(135deg, var(--noona) 0%, var(--lm-pink-600) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.promo-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.3;
+}
+.promo-banner .promo-inner {
+  position: relative;
+  z-index: 1;
+}
+.promo-banner h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: 700;
+  color: var(--paper);
+  margin: 0 0 12px;
+  letter-spacing: var(--tracking-tight);
+}
+.promo-banner p {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: rgba(255,255,255,0.8);
+  margin: 0 0 24px;
+}
+.promo-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-radius: var(--r-full);
+  background: var(--paper);
+  color: var(--noona);
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 6px 6px 0 0 var(--noona-900);
+}
+
+/* ═══════ FOUNDER ═══════ */
+.founder-section {
+  padding: clamp(80px, 10vw, 120px) 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.founder-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,169,126,0.08) 0%, transparent 50%, rgba(200,169,126,0.04) 100%);
+  pointer-events: none;
+}
+.founder-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+.founder-photo {
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.6;
+}
+.founder-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--noona);
+  margin-bottom: 16px;
+}
+.founder-name {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.founder-role {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.founder-bio {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+.founder-bio strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+.founder-stats {
+  display: flex;
+  gap: 40px;
+}
+.founder-stat-val {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 800;
+  color: var(--noona);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.founder-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+}
+
+/* Trust section */
+.trust-section {
+  padding: 60px 48px;
+  background: var(--paper);
+  border-top: 2px solid var(--ink-05);
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.trust-item {
+  text-align: center;
+  padding: 24px;
+}
+.trust-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.trust-item h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.trust-item p {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--ink-40);
+  margin: 0;
+  line-height: var(--leading-base);
+}
+
+/* ═══════ BOOKING / RDV ═══════ */
+.booking-section {
+  padding: 0;
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 700px;
+}
+.booking-photo {
+  overflow: hidden;
+}
+.booking-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.booking-body {
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.booking-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--noona);
+  margin-bottom: 12px;
+}
+.booking-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #fff;
+  margin: 0 0 12px;
+}
+.booking-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.45);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 28px;
+  max-width: 400px;
+}
+.booking-perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+}
+.booking-perks li {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.booking-perks li::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--noona);
+  flex-shrink: 0;
+}
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.booking-form label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.booking-form input,
+.booking-form select {
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  transition: border-color 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+.booking-form input::placeholder { color: rgba(255,255,255,0.2); }
+.booking-form input:focus,
+.booking-form select:focus {
+  border-color: var(--noona);
+}
+.booking-form select option { background: var(--ink); color: #fff; }
+.booking-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.booking-submit {
+  margin-top: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: var(--r-full);
+  background: var(--noona);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  box-shadow: 4px 4px 0 0 var(--noona-900);
+}
+.booking-submit:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 0 var(--noona-900);
+}
+.booking-submit:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 0 var(--noona-900);
+}
+
+/* ═══════ FOOTER ═══════ */
+.footer {
+  padding: 80px 48px 40px;
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-top {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-about {}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.footer-brand svg { width: 28px; height: 28px; color: var(--noona); }
+.footer-brand span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+.footer-about p {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  max-width: 280px;
+}
+.footer-social {
+  display: flex;
+  gap: 10px;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border-radius: var(--r-full);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s var(--ease);
+}
+.footer-social a:hover {
+  background: var(--noona);
+  color: #fff;
+  border-color: var(--noona);
+  transform: translateY(-2px);
+}
+.footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin: 0 0 20px;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-col ul a {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.footer-col ul a:hover { color: #fff; }
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.25);
+}
+.footer-legal {
+  display: flex;
+  gap: 20px;
+}
+.footer-legal a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+/* Mobile burger */
+.mobile-burger {
+  display: none;
+  width: 40px; height: 40px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  color: #fff;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 60;
+}
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+.mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-nav-overlay a {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-nav-overlay a:hover {
+  color: var(--noona);
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobile large */
+@media (max-width: 960px) {
+  /* Hero */
+  .hero-nav { padding: 20px 24px; }
+  .nav-right { display: none; }
+  .mobile-burger { display: flex; }
+  .hero-main { padding: 0 24px 24px; }
+  .hero-headline { font-size: clamp(36px, 9vw, 52px); }
+  .hero-tagline { font-size: 15px; margin-bottom: 24px; }
+  .hero-eyebrow { margin-left: auto; margin-right: auto; transform: scale(0.9); }
+
+  /* Ticker */
+  .hero-ticker-track { padding: 10px 0; }
+  .ticker-item, .ticker-item-brand { font-size: 11px; }
+  .hero-ticker-track.reverse { display: none; }
+
+  /* Proof bar */
+  .hero-proof-bar { gap: 16px; padding: 14px 20px; flex-wrap: wrap; justify-content: center; }
+  .proof-divider { display: none; }
+  .proof-value { font-size: 16px; }
+  .proof-item { font-size: 9px; gap: 6px; }
+
+  /* Brands */
+  .brands-section { padding: 32px 24px; }
+  .brands-inner { flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .brands-label { width: 100%; text-align: center; margin-bottom: 4px; }
+  .brands-list a { padding: 6px 14px; font-size: 12px; }
+
+  /* Services columns */
+  .services-cols-header { padding: 48px 24px 0; }
+  .svc-grid {
+    flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 20px;
+  }
+  .svc-grid::-webkit-scrollbar { display: none; }
+  .svc-col { flex: 0 0 75%; min-width: 75%; scroll-snap-align: center; }
+  .svc-col:hover { flex-grow: 1; }
+
+  /* Products */
+  .products-section { padding: 60px 24px; }
+  .products-section .section-header { margin-bottom: 32px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .product-card .product-img { height: 200px; }
+  .product-card h3 { font-size: 13px; }
+  .product-card .product-price { font-size: var(--fs-base); }
+
+  /* Blog */
+  .blog-section { padding: 60px 24px; }
+  .blog-grid { grid-template-columns: 1fr; gap: 20px; }
+  .blog-card.blog-featured { grid-row: auto; }
+  .blog-card.blog-featured .blog-cover { height: 220px; }
+  .blog-card.blog-featured h3 { font-size: var(--fs-lg); }
+  .blog-card.blog-featured p { font-size: var(--fs-sm); }
+  .blog-card .blog-cover { height: 180px; }
+
+  /* Promo */
+  .promo-banner { padding: 40px 24px; }
+  .promo-banner h2 { font-size: var(--fs-2xl); }
+
+  /* Trust */
+  .trust-section { padding: 48px 24px; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+  /* Booking */
+  .booking-section { grid-template-columns: 1fr; padding: 0; }
+  .booking-photo { height: 280px; }
+  .booking-body { padding: 40px 24px 60px; }
+  .booking-perks { grid-template-columns: 1fr; }
+  .booking-title { font-size: var(--fs-2xl); }
+
+  /* Footer */
+  .footer { padding: 60px 24px 32px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer-about { grid-column: 1 / -1; text-align: center; }
+  .footer-about p { max-width: none; margin: 0 auto 16px; }
+  .footer-social { justify-content: center; }
+  .footer-col { text-align: center; }
+  .footer-col h4 { margin-bottom: 14px; }
+  .footer-bottom { justify-content: center; flex-direction: column; text-align: center; gap: 12px; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; }
+}
+
+/* Mobile small */
+@media (max-width: 560px) {
+  /* Hero */
+  .hero-headline { font-size: clamp(30px, 10vw, 42px); }
+  .hero-tagline { font-size: 14px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 320px; margin: 0 auto; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+
+  /* Proof bar */
+  .hero-proof-bar { gap: 12px; padding: 12px 16px; }
+  .proof-item { font-size: 8px; }
+  .proof-value { font-size: 14px; }
+
+  /* Services */
+  .svc-col { flex: 0 0 85%; min-width: 85%; }
+
+  /* Products */
+  .products-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .product-card .product-img { height: 240px; }
+  .product-card h3 { font-size: var(--fs-base); }
+
+  /* Blog */
+  .blog-card .blog-cover { height: 180px; }
+  .blog-card h3 { font-size: var(--fs-base); }
+
+  /* Founder */
+  .founder-grid { grid-template-columns: 1fr; text-align: center; }
+  .founder-photo { max-width: 280px; margin: 0 auto; aspect-ratio: 1; }
+  .founder-stats { justify-content: center; }
+
+  /* Trust */
+  .trust-grid { grid-template-columns: 1fr; }
+  .trust-item { padding: 16px; }
+
+  /* Booking */
+  .booking-photo { height: 220px; }
+  .booking-row { grid-template-columns: 1fr; }
+  .booking-body { padding: 32px 20px 48px; }
+  .booking-title { font-size: var(--fs-xl); }
+  .booking-desc { font-size: var(--fs-xs); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ticker-track,
+  .hero-ticker-track.reverse {
+    animation: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero">
+
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1920&h=1080&fit=crop&q=85" alt="Boulangerie artisanale">
+  </div>
+
+  <nav class="hero-nav">
+    <a class="logo" href="/">
+      <svg class="logo-butterfly" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <ellipse cx="100" cy="120" rx="60" ry="55" fill="currentColor" opacity="0.9"/>
+        <rect x="80" y="30" width="40" height="70" rx="20" fill="currentColor" opacity="0.8"/>
+        <rect x="60" y="60" width="80" height="8" rx="4" fill="currentColor" opacity="0.5"/>
+        <rect x="65" y="78" width="70" height="6" rx="3" fill="currentColor" opacity="0.4"/>
+      </svg>
+      <span class="logo-text">Atelier <span>Noona</span></span>
+    </a>
+    <div class="nav-right">
+      <a href="#carte" class="nav-link">La Carte</a>
+      <a href="#galerie" class="nav-link">Galerie</a>
+      <a href="#chef" class="nav-link">Le Chef</a>
+      <a href="tel:+33400000000" class="nav-cta">R&eacute;server &rarr;</a>
+    </div>
+    <button class="mobile-burger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <a href="#carte" onclick="closeMobileNav()">La Carte</a>
+    <a href="#galerie" onclick="closeMobileNav()">Galerie</a>
+    <a href="#chef" onclick="closeMobileNav()">Le Chef</a>
+    <a href="tel:+33400000000" onclick="closeMobileNav()">R&eacute;server</a>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal" data-delay="400">
+        <span class="eyebrow-dot"></span>
+        <span class="eyebrow-text">Boulangerie &bull; P&acirc;tisserie &bull; Brasserie &bull; Le Cannet</span>
+        <span class="eyebrow-live">Ouvert</span>
+      </div>
+
+      <h1 class="hero-headline reveal" data-delay="600">Du fournil<br>&agrave; la table.</h1>
+
+      <p class="hero-tagline reveal" data-delay="800">Pain au levain et viennoiseries le matin, cuisine populaire et g&eacute;n&eacute;reuse le midi. Chef Abel Bayili, Toque Blanche International, vous accueille au Cannet.</p>
+
+      <div class="hero-ctas reveal" data-delay="1000">
+        <a href="tel:+33400000000" class="btn-primary"><span>R&eacute;server une table</span> <small>Appeler</small></a>
+        <a href="#carte" class="btn-ghost"><span>D&eacute;couvrir la carte</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero-ticker reveal" data-delay="1000">
+    <div class="hero-ticker-track">
+      <span class="ticker-item">Baguette tradition</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Croissant pur beurre</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Pain au levain</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Bouillon cannetan</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Plat du jour</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Fait maison</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">P&acirc;tisseries fines</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Brunch</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Viennoiseries</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Le Cannet 06</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Cuisine populaire</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Chef Abel Bayili</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Baguette tradition</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Croissant pur beurre</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Pain au levain</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Bouillon cannetan</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Plat du jour</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Fait maison</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">P&acirc;tisseries fines</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Brunch</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Viennoiseries</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Le Cannet 06</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Cuisine populaire</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Chef Abel Bayili</span><span class="ticker-sep">&#9830;</span>
+    </div>
+    <div class="hero-ticker-track reverse">
+      <span class="ticker-item">Tarte aux fruits</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Pain de campagne</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Entremet chocolat</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Toque Blanche International</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Desserts maison</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Formule midi</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Produits frais</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">42 ch de l'Aubar&egrave;de</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Prix populaires</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Atelier Noona</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Le Petit Bouillon</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Le Cannet</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Tarte aux fruits</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Pain de campagne</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Entremet chocolat</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Toque Blanche International</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Desserts maison</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Formule midi</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Produits frais</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">42 ch de l'Aubar&egrave;de</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Prix populaires</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Atelier Noona</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item">Le Petit Bouillon</span><span class="ticker-sep">&#9830;</span>
+      <span class="ticker-item ticker-highlight">Le Cannet</span><span class="ticker-sep">&#9830;</span>
+    </div>
+  </div>
+
+  <div class="hero-proof-bar reveal" data-delay="1200">
+    <div class="proof-item"><span class="proof-value">Toque Blanche</span> international</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">Le Cannet</span> 06</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">Fait maison</span> 100%</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">Prix</span> populaires</div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-value">5&#9733;</span> avis clients</div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     NOS UNIVERS
+     ════════════════════════════════════════════════════════════ -->
+<section class="brands-section">
+  <div class="brands-inner">
+    <span class="brands-label">Nos univers</span>
+    <div class="brands-list">
+      <a href="#carte">Boulangerie</a>
+      <a href="#carte">P&acirc;tisserie</a>
+      <a href="#carte">Brasserie</a>
+      <a href="#carte">Brunch</a>
+      <a href="#carte">Traiteur</a>
+      <a href="#carte">Fait maison</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SERVICES COLUMNS
+     ════════════════════════════════════════════════════════════ -->
+<section class="services-cols" id="services">
+  <div class="services-cols-header">
+    <div class="section-eyebrow">&mdash; Nos m&eacute;tiers</div>
+    <h2>Deux passions, <span>un lieu</span></h2>
+  </div>
+  <div class="svc-grid">
+    <a href="#carte" class="svc-col" style="--tc: var(--noona);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=800&fit=crop&q=80" alt="Boulangerie" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Artisanal</div>
+          <div class="svc-col-name">Boulangerie</div>
+          <div class="svc-col-desc">Pain au levain, baguette tradition, pains sp&eacute;ciaux</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#carte" class="svc-col" style="--tc: var(--rainbow-orange);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=600&h=800&fit=crop&q=80" alt="P&acirc;tisserie" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Gourmand</div>
+          <div class="svc-col-name">P&acirc;tisserie</div>
+          <div class="svc-col-desc">Tartes, entremets, viennoiseries, cr&eacute;ations sucr&eacute;es</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#carte" class="svc-col" style="--tc: var(--rainbow-red);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=800&fit=crop&q=80" alt="Brasserie" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Le Petit Bouillon</div>
+          <div class="svc-col-name">Brasserie</div>
+          <div class="svc-col-desc">Cuisine populaire, plat du jour, bouillon cannetan</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+    <a href="#carte" class="svc-col" style="--tc: var(--rainbow-green);">
+      <div class="svc-col-image">
+        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=600&h=800&fit=crop&q=80" alt="Brunch" loading="lazy">
+      </div>
+      <div class="svc-col-info">
+        <div>
+          <div class="svc-col-tag">Dimanche</div>
+          <div class="svc-col-name">Brunch</div>
+          <div class="svc-col-desc">Formule sucr&eacute;-sal&eacute;, boisson chaude, jus frais</div>
+        </div>
+        <div class="svc-col-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     LA CARTE
+     ════════════════════════════════════════════════════════════ -->
+<section class="products-section" id="carte">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">&mdash; La carte</div>
+        <h2>Nos <span>incontournables</span></h2>
+      </div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">Signature</span>
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=500&fit=crop&crop=center" alt="Bouillon cannetan" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Le Petit Bouillon</div>
+          <h3>Bouillon Cannetan</h3>
+          <div class="product-price-row">
+            <div class="product-price">&agrave; partir de 8&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-new">Chaque jour</span>
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=500&fit=crop&crop=center" alt="Plat du jour" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Brasserie</div>
+          <h3>Plat du jour fait maison</h3>
+          <div class="product-price-row">
+            <div class="product-price">&agrave; partir de 12&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=500&fit=crop&crop=center" alt="Baguette tradition" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Boulangerie</div>
+          <h3>Baguette tradition</h3>
+          <div class="product-price-row">
+            <div class="product-price">1,30&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=600&h=500&fit=crop&crop=center" alt="Croissant pur beurre" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Viennoiserie</div>
+          <h3>Croissant pur beurre</h3>
+          <div class="product-price-row">
+            <div class="product-price">1,50&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-promo">Artisan</span>
+          <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=600&h=500&fit=crop&crop=center" alt="P&acirc;tisserie du jour" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-brand">P&acirc;tisserie</div>
+          <h3>P&acirc;tisserie du jour</h3>
+          <div class="product-price-row">
+            <div class="product-price">&agrave; partir de 4,50&euro;</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img">
+          <span class="product-badge badge-new">Dimanche</span>
+          <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=600&h=500&fit=crop&crop=center" alt="Formule brunch" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Brunch</div>
+          <h3>Formule brunch sucr&eacute;-sal&eacute;</h3>
+          <div class="product-price-row">
+            <div class="product-price">&agrave; partir de 25&euro;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PROMO BANNER — FORMULE MIDI
+     ════════════════════════════════════════════════════════════ -->
+<section class="promo-banner">
+  <div class="promo-inner">
+    <h2>Formule d&eacute;jeuner &agrave; prix populaire</h2>
+    <p>Entr&eacute;e + plat ou plat + dessert, fait maison chaque jour avec des produits frais. Cuisine g&eacute;n&eacute;reuse, prix doux.</p>
+    <div class="promo-code">Service midi &bull; 12h &agrave; 14h30</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     GALERIE
+     ════════════════════════════════════════════════════════════ -->
+<section class="blog-section" id="galerie">
+  <div class="section-inner">
+    <div class="section-eyebrow">&mdash; En images</div>
+    <h2>Notre <span>galerie</span></h2>
+    <div class="blog-grid">
+      <a class="blog-card blog-featured reveal" href="https://www.instagram.com/atelier_noona_lepetitbouillon/" target="_blank" rel="noopener">
+        <div class="blog-cover">
+          <span class="blog-tag">Brasserie</span>
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop&crop=center" alt="Plat du chef" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-date">Le Petit Bouillon</div>
+          <h3>Cuisine populaire du Chef Abel</h3>
+          <p>Des plats g&eacute;n&eacute;reux, mijot&eacute;s avec passion. Le bouillon cannetan, signature de la maison, r&eacute;chauffe les c&oelig;urs.</p>
+          <span class="blog-read-link">Voir sur Instagram &rarr;</span>
+        </div>
+      </a>
+      <a class="blog-card reveal" href="https://www.instagram.com/atelier_noona_lepetitbouillon/" target="_blank" rel="noopener">
+        <div class="blog-cover">
+          <span class="blog-tag">Boulangerie</span>
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=400&fit=crop&crop=center" alt="Pain artisanal" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-date">Atelier Noona</div>
+          <h3>Pains au levain naturel</h3>
+          <p>Farine fran&ccedil;aise, p&eacute;trissage lent, cuisson au four &agrave; sole. La baguette tradition comme avant.</p>
+          <span class="blog-read-link">Voir sur Instagram &rarr;</span>
+        </div>
+      </a>
+      <a class="blog-card reveal" href="https://www.instagram.com/atelier_noona_lepetitbouillon/" target="_blank" rel="noopener">
+        <div class="blog-cover">
+          <span class="blog-tag">P&acirc;tisserie</span>
+          <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=600&h=400&fit=crop&crop=center" alt="P&acirc;tisseries fines" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-date">Atelier Noona</div>
+          <h3>P&acirc;tisseries fines &amp; viennoiseries</h3>
+          <p>Tartes aux fruits de saison, entremets, croissants feuillet&eacute;s 72h. Le go&ucirc;t de l'authentique.</p>
+          <span class="blog-read-link">Voir sur Instagram &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     CHEF ABEL BAYILI
+     ════════════════════════════════════════════════════════════ -->
+<section class="founder-section" id="chef">
+  <div class="founder-inner">
+    <div class="founder-grid reveal">
+      <div class="founder-photo">Photo du<br>Chef Abel</div>
+      <div class="founder-info">
+        <p class="founder-eyebrow">Le Chef</p>
+        <h2 class="founder-name">Abel Bayili</h2>
+        <p class="founder-role">Chef cuisinier &amp; boulanger &mdash; Toque Blanche International</p>
+        <p class="founder-bio">Form&eacute; dans les plus grandes maisons, <strong>Abel Bayili</strong> a choisi Le Cannet pour installer son univers : un lieu o&ugrave; le pain croustille d&egrave;s l'aube et o&ugrave; la cuisine populaire reprend ses lettres de noblesse le midi. <strong>Toque Blanche International</strong>, il d&eacute;fend une vision simple &mdash; des produits frais, un savoir-faire artisanal, et des prix accessibles &agrave; tous. Son Bouillon Cannetan est devenu la signature de la maison.</p>
+        <div class="founder-stats">
+          <div>
+            <div class="founder-stat-val">Toque Blanche</div>
+            <div class="founder-stat-label">international</div>
+          </div>
+          <div>
+            <div class="founder-stat-val">Le Cannet</div>
+            <div class="founder-stat-label">06 &bull; Alpes-Maritimes</div>
+          </div>
+          <div>
+            <div class="founder-stat-val">5&#9733;</div>
+            <div class="founder-stat-label">avis clients</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     ENGAGEMENTS
+     ════════════════════════════════════════════════════════════ -->
+<section class="trust-section">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">&#127859;</div>
+      <h4>100% fait maison</h4>
+      <p>Chaque plat, chaque pain, chaque p&acirc;tisserie est pr&eacute;par&eacute; sur place.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#127813;</div>
+      <h4>Produits frais</h4>
+      <p>Approvisionnement local et de saison. La qualit&eacute; sans compromis.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#128176;</div>
+      <h4>Prix populaires</h4>
+      <p>Cuisine g&eacute;n&eacute;reuse et accessible. Bien manger ne doit pas co&ucirc;ter cher.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">&#127942;</div>
+      <h4>Toque Blanche</h4>
+      <p>Distinction internationale qui r&eacute;compense l'excellence culinaire du Chef Abel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     R&Eacute;SERVATION
+     ════════════════════════════════════════════════════════════ -->
+<section class="booking-section" id="rdv">
+  <div class="booking-photo">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=1000&fit=crop&q=80" alt="Table du restaurant" loading="lazy">
+  </div>
+  <div class="booking-body">
+    <p class="booking-eyebrow">R&eacute;servation</p>
+    <h2 class="booking-title">R&eacute;servez votre table</h2>
+    <p class="booking-desc">Pour le d&eacute;jeuner, le brunch ou un &eacute;v&eacute;nement priv&eacute;. Nous vous accueillons avec plaisir.</p>
+    <ul class="booking-perks">
+      <li>Service midi : 12h &agrave; 14h30</li>
+      <li>Brunch le dimanche</li>
+      <li>Groupes bienvenus</li>
+      <li>42 ch de l'Aubar&egrave;de, Le Cannet</li>
+    </ul>
+    <form class="booking-form" onsubmit="event.preventDefault(); this.querySelector('.booking-submit').textContent='R&eacute;servation envoy&eacute;e ✓'; this.querySelector('.booking-submit').style.background='#22c55e';">
+      <div class="booking-row">
+        <label>
+          Nom
+          <input type="text" placeholder="Dupont" required>
+        </label>
+        <label>
+          T&eacute;l&eacute;phone
+          <input type="tel" placeholder="06 12 34 56 78" required>
+        </label>
+      </div>
+      <label>
+        Nombre de couverts
+        <select required>
+          <option value="" disabled selected>Combien de personnes ?</option>
+          <option>1 personne</option>
+          <option>2 personnes</option>
+          <option>3 personnes</option>
+          <option>4 personnes</option>
+          <option>5 personnes</option>
+          <option>6 personnes</option>
+          <option>7+ personnes (groupe)</option>
+        </select>
+      </label>
+      <div class="booking-row">
+        <label>
+          Date
+          <input type="date" required>
+        </label>
+        <label>
+          Cr&eacute;neau
+          <select required>
+            <option value="" disabled selected>Horaire</option>
+            <option>12:00</option>
+            <option>12:15</option>
+            <option>12:30</option>
+            <option>12:45</option>
+            <option>13:00</option>
+            <option>13:15</option>
+            <option>13:30</option>
+            <option>13:45</option>
+            <option>14:00</option>
+          </select>
+        </label>
+      </div>
+      <button type="submit" class="booking-submit">R&eacute;server ma table</button>
+    </form>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-about">
+      <div class="footer-brand">
+        <svg viewBox="0 0 200 200" fill="none">
+          <ellipse cx="100" cy="120" rx="60" ry="55" fill="currentColor" opacity="0.9"/>
+          <rect x="80" y="30" width="40" height="70" rx="20" fill="currentColor" opacity="0.8"/>
+          <rect x="60" y="60" width="80" height="8" rx="4" fill="currentColor" opacity="0.5"/>
+          <rect x="65" y="78" width="70" height="6" rx="3" fill="currentColor" opacity="0.4"/>
+        </svg>
+        <span>Atelier Noona</span>
+      </div>
+      <p>Boulangerie artisanale, p&acirc;tisserie fine &amp; cuisine populaire par Chef Abel Bayili au Cannet.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/atelier_noona_lepetitbouillon/" target="_blank" rel="noopener" aria-label="Instagram">&#9901;</a>
+        <a href="https://www.facebook.com/ateliernoona" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="tel:+33400000000" aria-label="T&eacute;l&eacute;phone">&#9742;</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>La Carte</h4>
+      <ul>
+        <li><a href="#carte">Boulangerie</a></li>
+        <li><a href="#carte">P&acirc;tisserie</a></li>
+        <li><a href="#carte">Brasserie</a></li>
+        <li><a href="#carte">Brunch</a></li>
+        <li><a href="#carte">Formule midi</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horaires</h4>
+      <ul>
+        <li><a href="#">Boulangerie : 7h &agrave; 19h</a></li>
+        <li><a href="#">Brasserie : 12h &agrave; 14h30</a></li>
+        <li><a href="#">Brunch dim. : 10h &agrave; 14h</a></li>
+        <li><a href="#">Ferm&eacute; le lundi</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Infos</h4>
+      <ul>
+        <li><a href="#rdv">R&eacute;server</a></li>
+        <li><a href="#chef">Le Chef</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Mentions l&eacute;gales</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 Atelier Noona &amp; Le Petit Bouillon &mdash; 42 chemin de l'Aubar&egrave;de, Le Cannet. Tous droits r&eacute;serv&eacute;s.</span>
+    <div class="footer-legal">
+      <a href="#">Mentions l&eacute;gales</a>
+      <a href="#">Confidentialit&eacute;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Hero staged reveal
+(function() {
+  var els = document.querySelectorAll('[data-delay]');
+  els.forEach(function(el) {
+    var delay = parseInt(el.dataset.delay, 10) || 0;
+    setTimeout(function() {
+      el.classList.add('revealed');
+      if (el.classList.contains('payoff')) {
+        setTimeout(function() { el.classList.add('shimmer'); }, 600);
+      }
+    }, delay);
+  });
+})();
+
+// Scroll reveal for sections
+(function() {
+  var els = document.querySelectorAll('.reveal:not([data-delay])');
+  if (!els.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(function(el) { observer.observe(el); });
+})();
+
+// Place orbit tags
+(function() {
+  var container = document.getElementById('orbit-container');
+  if (!container) return;
+  var tags = container.querySelectorAll('.product-tag');
+  var rings = [155, 220, 285];
+  var counts = [0, 0, 0];
+
+  tags.forEach(function(tag) {
+    var ring = parseInt(tag.dataset.ring, 10);
+    counts[ring]++;
+  });
+
+  var indices = [0, 0, 0];
+  tags.forEach(function(tag) {
+    var ring = parseInt(tag.dataset.ring, 10);
+    var i = indices[ring]++;
+    var total = counts[ring];
+    var angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+    var r = rings[ring];
+    var x = Math.cos(angle) * r;
+    var y = Math.sin(angle) * r;
+
+    tag.style.left = x + 'px';
+    tag.style.top = y + 'px';
+    tag.style.transform = 'translate(-50%, -50%)';
+
+    var depth = ring / 2;
+    tag.style.setProperty('--tag-opacity', Math.max(0.6, 1 - depth * 0.2));
+    tag.style.setProperty('--tag-scale', Math.max(0.75, 1 - depth * 0.12));
+  });
+})();
+
+// Mobile burger menu
+var burger = document.querySelector('.mobile-burger');
+var mobileNav = document.getElementById('mobile-nav');
+if (burger && mobileNav) {
+  burger.addEventListener('click', function() {
+    var isOpen = mobileNav.classList.toggle('open');
+    burger.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+  });
+}
+function closeMobileNav() {
+  if (mobileNav) mobileNav.classList.remove('open');
+  if (burger) burger.innerHTML = '&#9776;';
+}
+
+// Prevent scroll on # links
+document.querySelectorAll('a[href="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>
