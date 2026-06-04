@@ -1986,9 +1986,139 @@ a { color: inherit; }
     animation: none !important;
   }
 }
+
+/* ─── Maquette banner ─── */
+.maquette-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: var(--ink);
+  border-bottom: 3px solid var(--noona);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.85);
+  line-height: 1.4;
+  backdrop-filter: blur(12px);
+}
+.maquette-banner strong {
+  color: var(--noona);
+  font-weight: 700;
+}
+.maquette-banner .maq-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--noona);
+  border: 2px solid var(--ink);
+  padding: 8px 18px;
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.maquette-banner .maq-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--ink);
+}
+.maquette-banner .maq-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.maquette-banner .maq-close:hover { color: #fff; }
+
+body { padding-top: 52px; }
+
+/* ─── Proposal modal ─── */
+.proposal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.proposal-overlay.open { display: flex; }
+.proposal-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(200,169,126,0.3);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.proposal-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.proposal-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  background: var(--noona);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.proposal-close:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--ink);
+}
 </style>
 </head>
 <body>
+
+<!-- ─── Maquette banner ─── -->
+<div class="maquette-banner" id="maquetteBanner">
+  <span><strong>Maquette de d&eacute;monstration</strong> &mdash; Ceci est un prototype. De la maquette au r&eacute;sultat final, le design, les contenus et les fonctionnalit&eacute;s seront ajust&eacute;s ensemble selon tes retours.</span>
+  <button class="maq-btn" onclick="openProposal()">Voir la proposition &rarr;</button>
+  <button class="maq-close" onclick="this.parentElement.style.display='none';document.body.style.paddingTop='0'" aria-label="Fermer">&times;</button>
+</div>
+
+<!-- ─── Proposal modal ─── -->
+<div class="proposal-overlay" id="proposalModal">
+  <div class="proposal-frame">
+    <button class="proposal-close" onclick="closeProposal()">Fermer &times;</button>
+    <iframe id="proposalIframe" src="" loading="lazy"></iframe>
+  </div>
+</div>
 
 <!-- ════════════════════════════════════════════════════════════
      HERO
@@ -2620,6 +2750,30 @@ function closeMobileNav() {
 // Prevent scroll on # links
 document.querySelectorAll('a[href="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) { e.preventDefault(); });
+});
+
+// Proposal modal
+function openProposal() {
+  var modal = document.getElementById('proposalModal');
+  var iframe = document.getElementById('proposalIframe');
+  if (!iframe.src || iframe.src === '' || iframe.src === location.href) {
+    iframe.src = 'proposition/index.html';
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProposal() {
+  var modal = document.getElementById('proposalModal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('proposalModal').addEventListener('click', function(e) {
+  if (e.target === this) closeProposal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('proposalModal').classList.contains('open')) {
+    closeProposal();
+  }
 });
 </script>
 </body>

@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PP IA Agency &times; ADN Production &mdash; Proposition Atelier Noona &amp; Maison Mignardise</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  deck-stage:not(:defined) { visibility: hidden; }
+
+  :root {
+    --void:  #1A1209;
+    --ink:   #1A1209;
+    --paper: #FDF8F0;
+    --cream: #C8A97E;
+    --brown: #8B6A3E;
+    --gold:  #D4A855;
+    --green: #4A7C59;
+    --red:   #C44D3F;
+    --warm:  linear-gradient(135deg, #C8A97E 0%, #D4A855 50%, #C8A97E 100%);
+  }
+
+  section {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    overflow: hidden;
+    padding: 0;
+    --acc: var(--cream);
+  }
+  section * { box-sizing: border-box; }
+  section.light { background: var(--paper); color: var(--ink); }
+
+  .layer { position: absolute; inset: 0; padding: 64px 84px 56px; display: flex; flex-direction: column; z-index: 5; }
+
+  .grain { position: absolute; inset: 0; z-index: 40; pointer-events: none; opacity: 0.25; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  .chrome { display: flex; align-items: center; justify-content: space-between; flex: 0 0 auto; z-index: 6; }
+  .mk { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 900; font-size: 21px; letter-spacing: 0.01em; }
+  .mk .sq { width: 13px; height: 13px; background: var(--cream); display: inline-block; border-radius: 4px; }
+  .mk em { font-family: var(--font-mono); font-style: normal; font-weight: 500; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; text-align: right; line-height: 1.5; }
+
+  .foot { display: flex; align-items: flex-end; justify-content: space-between; flex: 0 0 auto; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; z-index: 6; }
+  .fill { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; position: relative; z-index: 6; }
+
+  .pill { display: inline-block; font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; background: var(--acc); color: var(--ink); padding: 7px 15px; border-radius: 4px; }
+  .eye { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acc); }
+  h1.d, h2.d { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.04em; line-height: 0.86; margin: 0; text-wrap: pretty; text-transform: uppercase; }
+  .ir { background: linear-gradient(102deg, #C8A97E, #D4A855, #C8A97E); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .acc { color: var(--acc); }
+
+  /* cover */
+  .cover .fill { justify-content: center; }
+  .cover .d { font-size: 100px; line-height: 0.88; max-width: 900px; }
+  .cover .sub { margin-top: 36px; font-size: 26px; line-height: 1.45; max-width: 760px; }
+  .cover .sub b { color: var(--gold); font-weight: 700; }
+
+  /* statement */
+  .stmt .fill { justify-content: center; }
+  .stmt .big { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 88px; line-height: 0.88; letter-spacing: -0.04em; max-width: 1200px; text-wrap: pretty; }
+  .stmt .note { margin-top: 40px; max-width: 800px; font-size: 24px; line-height: 1.55; opacity: 0.78; }
+
+  /* split */
+  .split .fill { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .split .d { font-size: 72px; }
+  .split p { margin: 24px 0 0; font-size: 24px; line-height: 1.5; max-width: 700px; }
+  .split p b { color: var(--gold); font-weight: 700; }
+  .split p.mut { opacity: 0.6; }
+  .split .diagram { display: flex; flex-direction: column; gap: 16px; }
+  .split .site-box { padding: 22px 28px; border: 2px solid rgba(253,248,240,0.2); border-radius: 12px; font-size: 21px; font-weight: 600; display: flex; align-items: center; gap: 14px; }
+  .split .site-box.bad { border-color: rgba(196,77,63,0.4); opacity: 0.5; text-decoration: line-through; }
+  .split .site-box.good { border-color: var(--green); background: rgba(74,124,89,0.12); }
+  .split .site-box .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+  .split .site-box.bad .dot { background: var(--red); }
+  .split .site-box.good .dot { background: var(--green); }
+
+  /* pillar */
+  .pil .fill { justify-content: center; }
+  .pil .top { display: flex; align-items: flex-start; gap: 40px; flex: 0 0 auto; }
+  .pil .num { font-family: var(--font-display); font-weight: 900; font-size: 200px; line-height: 0.7; letter-spacing: -0.05em; color: var(--acc); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+  .pil .head { padding-top: 8px; }
+  .pil .head .pill { margin-bottom: 22px; }
+  .pil .head .d { font-size: 62px; line-height: 0.98; max-width: 1060px; margin-top: 4px; }
+  .pil .head .lead { margin-top: 22px; font-size: 25px; line-height: 1.28; max-width: 1000px; opacity: 0.66; }
+  .pil .deliv { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 70px; border-top: 3px solid var(--acc); flex: 0 0 auto; align-content: start; }
+  .pil .deliv li { display: grid; grid-template-columns: 50px 1fr; gap: 18px; padding: 20px 0; border-bottom: 1px solid rgba(253,248,240,0.14); font-size: 25px; line-height: 1.3; align-items: baseline; }
+  .pil .deliv li .n { font-family: var(--font-mono); font-size: 14px; color: var(--acc); font-variant-numeric: tabular-nums; }
+  .pil .deliv li b { font-weight: 700; color: var(--gold); }
+
+  /* price */
+  .price .fill { justify-content: center; }
+  .price .amt { font-family: var(--font-display); font-weight: 900; font-size: 200px; line-height: 0.78; letter-spacing: -0.05em; }
+  .price .amt small { display: block; margin-top: 8px; font-size: 48px; color: var(--paper); -webkit-text-fill-color: var(--paper); letter-spacing: -0.01em; }
+  .price .old { font-family: var(--font-display); font-weight: 700; font-size: 56px; text-decoration: line-through; opacity: 0.35; margin-bottom: 16px; }
+  .price .terms { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+  .price .terms .t { font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.04em; border: 2px solid rgba(253,248,240,0.3); padding: 12px 20px; border-radius: 4px; }
+  .price .terms .t.save { border-color: var(--green); background: rgba(74,124,89,0.15); color: var(--green); font-weight: 600; }
+
+  /* formule cards */
+  .formules { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 36px; flex: 1 1 auto; }
+  .formule { padding: 34px 30px; display: flex; flex-direction: column; border-top: 5px solid var(--c); background: rgba(253,248,240,0.04); border-radius: 0 0 8px 8px; position: relative; }
+  .formule.reco { background: rgba(253,248,240,0.08); border-top-width: 6px; }
+  .formule .f-badge { position: absolute; top: -5px; right: 20px; transform: translateY(-100%); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; background: var(--green); color: #fff; padding: 4px 10px; border-radius: 4px 4px 0 0; }
+  .formule .f-name { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 28px; line-height: 1.0; letter-spacing: -0.01em; }
+  .formule .f-price { font-family: var(--font-display); font-weight: 900; font-size: 48px; letter-spacing: -0.03em; margin-top: 12px; }
+  .formule .f-price small { font-size: 18px; font-weight: 500; opacity: 0.5; }
+  .formule .f-desc { font-size: 18px; line-height: 1.45; opacity: 0.72; margin-top: 16px; }
+  .formule .f-list { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; flex: 1 1 auto; }
+  .formule .f-list li { font-size: 17px; line-height: 1.3; padding-left: 20px; position: relative; }
+  .formule .f-list li::before { content: "\2713"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .formule .f-sub { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(253,248,240,0.12); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; opacity: 0.5; }
+
+  /* table */
+  .tbl { width: 100%; border-collapse: collapse; margin-top: 36px; }
+  .tbl th, .tbl td { text-align: left; padding: 20px 24px; font-size: 22px; border-bottom: 1px solid rgba(253,248,240,0.14); }
+  .tbl th { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc); border-bottom: 3px solid var(--acc); padding-bottom: 14px; }
+  .tbl td b { color: var(--gold); font-weight: 700; }
+  .tbl .price-col { font-family: var(--font-display); font-weight: 900; font-size: 28px; white-space: nowrap; }
+
+  /* contact */
+  .contact .fill { justify-content: center; }
+  .contact .d { font-size: 100px; }
+  .contact .who { margin-top: 38px; border-top: 3px solid var(--acc); }
+  .contact .who .r { display: grid; grid-template-columns: 150px 1fr; gap: 22px; padding: 16px 0; border-bottom: 1px solid rgba(253,248,240,0.14); align-items: baseline; }
+  .contact .who .role { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--acc); }
+  .contact .who .val { font-size: 25px; font-weight: 600; }
+  .contact .who .val.big { font-family: var(--font-display); font-weight: 900; font-size: 38px; letter-spacing: -0.01em; }
+
+  /* timeline */
+  .timeline { display: flex; gap: 0; margin-top: 48px; }
+  .tl-step { flex: 1; padding: 28px 24px; border-top: 4px solid var(--acc); position: relative; }
+  .tl-step::before { content: attr(data-n); font-family: var(--font-display); font-weight: 900; font-size: 64px; opacity: 0.08; position: absolute; top: 8px; right: 16px; }
+  .tl-step .tl-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc); margin-bottom: 12px; }
+  .tl-step .tl-title { font-family: var(--font-display); font-weight: 800; font-size: 22px; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; }
+  .tl-step .tl-desc { font-size: 16px; opacity: 0.6; margin-top: 8px; line-height: 1.4; }
+
+  /* search demo */
+  .search-demo { display: flex; flex-direction: column; gap: 18px; }
+  .search-bar { display: flex; align-items: center; gap: 14px; background: rgba(253,248,240,0.08); border: 1px solid rgba(253,248,240,0.15); border-radius: 999px; padding: 16px 28px; font-size: 22px; }
+  .search-bar .icon { opacity: 0.4; font-size: 20px; }
+  .search-bar.active { border-color: var(--green); background: rgba(74,124,89,0.1); }
+  .search-bar.inactive { opacity: 0.35; }
+  .result-tag { display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; padding: 5px 12px; border-radius: 4px; margin-left: 14px; }
+  .result-tag.top { background: var(--green); color: #fff; }
+  .result-tag.lost { background: rgba(196,77,63,0.3); color: var(--red); }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 COVER -->
+  <section class="cover" data-label="Couverture">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN Production</em></div><div class="tag">Proposition commerciale<br>Juin 2026</div></div>
+      <div class="fill">
+        <div class="eye">// Cr&eacute;ation de sites web sur-mesure</div>
+        <h1 class="d" style="margin-top:24px;">2 &eacute;tablissements.<br>2 sites.<br>1 <span class="ir">r&eacute;ussite</span>.</h1>
+        <p class="sub">On cr&eacute;e la pr&eacute;sence digitale de <b>l'Atelier Noona</b> et de la <b>Maison Mignardise</b> &mdash; deux sites d&eacute;di&eacute;s, deux client&egrave;les, deux strat&eacute;gies de conversion.</p>
+      </div>
+      <div class="foot"><span>PP IA Agency &times; ADN Production</span><span>Pac&ocirc;me Pohi &middot; Alex Quilghini</span></div>
+    </div>
+  </section>
+
+  <!-- 02 CONSTAT -->
+  <section class="stmt" data-label="Le constat">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Le probl&egrave;me</div></div>
+      <div class="fill">
+        <div class="eye">// Le constat</div>
+        <p class="big" style="margin-top:28px;">Un site qui fait <span class="ir">tout</span>,<br>c'est un site qui<br>ne fait <span class="acc">rien</span>.</p>
+        <p class="note">Un client qui cherche &laquo; restaurant Le Cannet &raquo; ne cherche pas &laquo; boulangerie p&acirc;tisserie traiteur brunch &raquo;. Deux activit&eacute;s, deux recherches Google, deux sites d&eacute;di&eacute;s &mdash; c'est la seule approche qui fonctionne pour le r&eacute;f&eacute;rencement local.</p>
+      </div>
+      <div class="foot"><span>Le probl&egrave;me</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 03 COMMENT ON CHERCHE -->
+  <section class="split" data-label="Comment on cherche">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Le comportement utilisateur</div></div>
+      <div class="fill">
+        <div>
+          <div class="eye">// Comment les gens cherchent</div>
+          <h2 class="d" style="margin-top:16px;">Une recherche<br>= un <span class="acc">besoin</span></h2>
+          <p>Les clients du Cannet tapent des requ&ecirc;tes pr&eacute;cises. Ton site doit r&eacute;pondre exactement &agrave; ce qu'ils cherchent :</p>
+        </div>
+        <div class="search-demo">
+          <div class="search-bar active">
+            <span class="icon">&#128269;</span> restaurant Le Cannet
+            <span class="result-tag top">1er r&eacute;sultat</span>
+          </div>
+          <div class="search-bar active">
+            <span class="icon">&#128269;</span> brunch Le Cannet
+            <span class="result-tag top">1er r&eacute;sultat</span>
+          </div>
+          <div class="search-bar active">
+            <span class="icon">&#128269;</span> p&acirc;tissier Le Cannet
+            <span class="result-tag top">1er r&eacute;sultat</span>
+          </div>
+          <div class="search-bar inactive">
+            <span class="icon">&#128269;</span> restaurant boulangerie p&acirc;tisserie traiteur
+            <span class="result-tag lost">Introuvable</span>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>Comportement utilisateur</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 04 LA STRATEGIE -->
+  <section class="split" data-label="La strat&eacute;gie">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Notre recommandation</div></div>
+      <div class="fill">
+        <div>
+          <div class="eye" style="color:var(--green);">// La strat&eacute;gie</div>
+          <h2 class="d" style="margin-top:16px;">Un site<br>par <span class="ir">activit&eacute;</span></h2>
+          <p>Chaque &eacute;tablissement a son propre site, optimis&eacute; pour <b>ses mots-cl&eacute;s</b>, <b>son audience</b> et <b>sa conversion</b>.</p>
+          <p>Un client qui cherche &laquo; restaurant &raquo; tombe sur un site 100&nbsp;% restaurant. Confiance imm&eacute;diate, r&eacute;servation en 2 clics.</p>
+        </div>
+        <div class="diagram">
+          <div class="site-box bad"><span class="dot"></span> www.abel-bayili.fr (tout en un)</div>
+          <div style="font-family:var(--font-mono);font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);padding-left:24px;">&darr; On remplace par &darr;</div>
+          <div class="site-box good"><span class="dot"></span> ateliernoona.fr &mdash; Restaurant</div>
+          <div class="site-box good"><span class="dot"></span> maisonmignardise.fr &mdash; P&acirc;tisserie / Traiteur</div>
+        </div>
+      </div>
+      <div class="foot"><span>Strat&eacute;gie</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 05 SITE 1 — ATELIER NOONA -->
+  <section class="pil" style="--acc:var(--cream);" data-label="Site 1 &mdash; Atelier Noona">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Site 1</div></div>
+      <div class="fill">
+        <div class="top">
+          <div class="num" style="color:var(--cream);">01</div>
+          <div class="head">
+            <span class="pill">Atelier Noona &amp; Le Petit Bouillon</span>
+            <h2 class="d">Le restaurant<br>qui se <span class="ir">r&eacute;serve</span></h2>
+            <p class="lead">Cuisine, parcours (Le Mas Candille, La Bastide Bruno Oger), r&eacute;servation en ligne.</p>
+          </div>
+        </div>
+        <ul class="deliv">
+          <li><span class="n">01</span><span><b>Design sur-mesure</b> aux couleurs de l'Atelier Noona</span></li>
+          <li><span class="n">02</span><span><b>Ton histoire</b> &mdash; ton parcours et celui de Wejden</span></li>
+          <li><span class="n">03</span><span><b>Carte en ligne</b> &mdash; mise &agrave; jour facile &agrave; chaque saison</span></li>
+          <li><span class="n">04</span><span><b>R&eacute;servation en ligne</b> int&eacute;gr&eacute;e directement</span></li>
+          <li><span class="n">05</span><span><b>Vente en ligne</b> &mdash; bons cadeaux, &eacute;v&eacute;nements, formules</span></li>
+          <li><span class="n">06</span><span><b>Galerie photos</b> des plats et de l'ambiance</span></li>
+          <li><span class="n">07</span><span><b>SEO local</b> + fiche Google My Business optimis&eacute;e</span></li>
+          <li><span class="n">08</span><span><b>Mobile parfait</b> + horaires + plan d'acc&egrave;s</span></li>
+        </ul>
+      </div>
+      <div class="foot"><span>Atelier Noona</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 06 SITE 2 — MAISON MIGNARDISE -->
+  <section class="pil" style="--acc:var(--gold);" data-label="Site 2 &mdash; Maison Mignardise">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Site 2</div></div>
+      <div class="fill">
+        <div class="top">
+          <div class="num" style="color:var(--gold);">02</div>
+          <div class="head">
+            <span class="pill" style="background:var(--gold);">Maison Mignardise</span>
+            <h2 class="d">La p&acirc;tisserie<br>qui se <span class="ir">commande</span></h2>
+            <p class="lead">Sp&eacute;cialit&eacute;s, brunch, traiteur, commandes sp&eacute;ciales &mdash; tout le savoir-faire en vitrine.</p>
+          </div>
+        </div>
+        <ul class="deliv">
+          <li><span class="n">01</span><span><b>Design sur-mesure</b> aux couleurs de la Maison Mignardise</span></li>
+          <li><span class="n">02</span><span><b>Catalogue produits</b> &mdash; pistache, pains, viennoiseries</span></li>
+          <li><span class="n">03</span><span><b>Section brunch</b> d&eacute;di&eacute;e pour capter cette client&egrave;le</span></li>
+          <li><span class="n">04</span><span><b>Section traiteur</b> &mdash; mariages, anniversaires, pro</span></li>
+          <li><span class="n">05</span><span><b>Vente en ligne</b> &mdash; commandes p&acirc;tisseries, g&acirc;teaux perso</span></li>
+          <li><span class="n">06</span><span><b>Formulaire devis</b> traiteur int&eacute;gr&eacute;</span></li>
+          <li><span class="n">07</span><span><b>SEO local</b> + fiche Google My Business optimis&eacute;e</span></li>
+          <li><span class="n">08</span><span><b>Mobile parfait</b> + galerie photos professionnelle</span></li>
+        </ul>
+      </div>
+      <div class="foot"><span>Maison Mignardise</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 07 TARIFS — PACK -->
+  <section class="price" data-label="Le tarif">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Offre sp&eacute;ciale</div></div>
+      <div class="fill">
+        <div class="eye" style="color:var(--gold);">// Pack 2 sites &mdash; prix valid&eacute; lors de notre &eacute;change</div>
+        <div class="old" style="margin-top:24px;">2 400 &euro; HT</div>
+        <div class="amt"><span class="ir">2 000 &euro;</span><small>HT &mdash; Pack 2 sites complets</small></div>
+        <div class="terms">
+          <div class="t">Atelier Noona &mdash; 1 000 &euro; HT</div>
+          <div class="t">Maison Mignardise &mdash; 1 000 &euro; HT</div>
+          <div class="t save">400 &euro; HT d'&eacute;conomie</div>
+          <div class="t">Vente en ligne + r&eacute;servation inclus</div>
+        </div>
+      </div>
+      <div class="foot"><span>Le tarif</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 08 OPTIONS -->
+  <section data-label="Options">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Options</div></div>
+      <div class="fill" style="justify-content:center;">
+        <div class="eye" style="color:var(--gold);">// Compl&eacute;ments &agrave; la carte</div>
+        <h2 class="d" style="margin-top:16px;font-size:68px;">Ajoutez ce qui<br>vous <span class="ir">correspond</span></h2>
+        <table class="tbl">
+          <thead>
+            <tr><th>Option</th><th>Description</th><th>Tarif</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Cr&eacute;ation / refonte logo</b></td>
+              <td>Par &eacute;tablissement &mdash; identit&eacute; visuelle compl&egrave;te</td>
+              <td class="price-col">150 &euro; <span style="font-size:16px;font-weight:400;opacity:0.6;">HT</span></td>
+            </tr>
+            <tr>
+              <td><b>Site multilingue</b></td>
+              <td>Fran&ccedil;ais + anglais &mdash; par site</td>
+              <td class="price-col">100 &euro; <span style="font-size:16px;font-weight:400;opacity:0.6;">HT / site</span></td>
+            </tr>
+            <tr>
+              <td><b>Newsletter</b></td>
+              <td>Collecte emails clients + int&eacute;gration &mdash; par site</td>
+              <td class="price-col">100 &euro; <span style="font-size:16px;font-weight:400;opacity:0.6;">HT / site</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="foot"><span>Options</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 09 ACCOMPAGNEMENT MENSUEL -->
+  <section data-label="Accompagnement">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Accompagnement</div></div>
+      <div class="fill" style="justify-content:center;">
+        <div class="eye" style="color:var(--gold);">// Un site sans suivi perd en visibilit&eacute;</div>
+        <h2 class="d" style="margin-top:16px;font-size:68px;">3 formules.<br>Vous <span class="ir">choisissez</span>.</h2>
+        <div class="formules">
+
+          <div class="formule" style="--c:var(--cream);">
+            <div class="f-name">Essentiel</div>
+            <div class="f-price ir">150 &euro; <small>HT / mois</small></div>
+            <p class="f-desc">Maintenance, mises &agrave; jour contenus et SEO de base. Votre site reste performant.</p>
+            <ul class="f-list">
+              <li>Mises &agrave; jour techniques &amp; s&eacute;curit&eacute;</li>
+              <li>Mise &agrave; jour contenus (cartes, horaires, photos)</li>
+              <li>Suivi performances SEO</li>
+              <li>Gestion fiche Google My Business</li>
+              <li>Support prioritaire</li>
+            </ul>
+            <div class="f-sub">Par site &middot; -20% si les 2 sites</div>
+          </div>
+
+          <div class="formule reco" style="--c:var(--green);">
+            <div class="f-badge">RECOMMAND&Eacute;</div>
+            <div class="f-name">Croissance</div>
+            <div class="f-price" style="color:var(--green);">250 &euro; <small>HT / mois</small></div>
+            <p class="f-desc">Tout Essentiel + cr&eacute;ation de contenu, SEO continu et reporting d&eacute;taill&eacute;.</p>
+            <ul class="f-list">
+              <li>Tout le Pack Essentiel</li>
+              <li>1 article SEO par mois</li>
+              <li>Optimisation SEO continue</li>
+              <li>Reporting mensuel d&eacute;taill&eacute;</li>
+              <li>Publications Google My Business</li>
+            </ul>
+            <div class="f-sub">Par site &middot; -20% si les 2 sites</div>
+          </div>
+
+          <div class="formule" style="--c:var(--gold);">
+            <div class="f-name">Premium</div>
+            <div class="f-price" style="color:var(--gold);">400 &euro; <small>HT / mois</small></div>
+            <p class="f-desc">Tout Croissance + r&eacute;seaux sociaux, photos pro et newsletters.</p>
+            <ul class="f-list">
+              <li>Tout le Pack Croissance</li>
+              <li>Gestion r&eacute;seaux sociaux (3 posts/sem)</li>
+              <li>Photos professionnelles r&eacute;guli&egrave;res</li>
+              <li>Campagnes promotionnelles</li>
+              <li>Newsletter mensuelle aux clients</li>
+            </ul>
+            <div class="f-sub">Par site &middot; -20% si les 2 sites</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="foot"><span>Accompagnement</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 10 CALENDRIER -->
+  <section class="stmt" style="--acc:var(--gold);" data-label="Calendrier">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Le calendrier</div></div>
+      <div class="fill">
+        <div class="eye" style="color:var(--gold);">// D&eacute;lai total : 6 &agrave; 8 semaines</div>
+        <p class="big" style="margin-top:28px;">On d&eacute;marre<br>d&egrave;s ta <span class="ir">validation</span>.</p>
+        <div class="timeline">
+          <div class="tl-step" data-n="01">
+            <div class="tl-label">Semaine 1</div>
+            <div class="tl-title">Brief cr&eacute;atif</div>
+            <div class="tl-desc">Collecte des contenus, photos, identit&eacute;</div>
+          </div>
+          <div class="tl-step" data-n="02">
+            <div class="tl-label">Semaines 2-3</div>
+            <div class="tl-title">Maquette site 1</div>
+            <div class="tl-desc">Design Atelier Noona &mdash; validation</div>
+          </div>
+          <div class="tl-step" data-n="03">
+            <div class="tl-label">Semaines 3-5</div>
+            <div class="tl-title">Production</div>
+            <div class="tl-desc">D&eacute;veloppement + int&eacute;grations</div>
+          </div>
+          <div class="tl-step" data-n="04">
+            <div class="tl-label">Semaine 5</div>
+            <div class="tl-title">Mise en ligne</div>
+            <div class="tl-desc">Site 1 live + lancement site 2</div>
+          </div>
+          <div class="tl-step" data-n="05">
+            <div class="tl-label">Semaines 6-8</div>
+            <div class="tl-title">Site 2 complet</div>
+            <div class="tl-desc">Maison Mignardise en ligne</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>Calendrier</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 11 POURQUOI NOUS -->
+  <section class="pil" style="--acc:var(--green);" data-label="Pourquoi nous">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">Nos atouts</div></div>
+      <div class="fill">
+        <div class="top">
+          <div class="num" style="color:var(--green);">&check;</div>
+          <div class="head">
+            <span class="pill" style="background:var(--green);color:#fff;">Pourquoi nous choisir</span>
+            <h2 class="d">L'&eacute;quipe qui conna&icirc;t<br>la <span class="ir">C&ocirc;te d'Azur</span></h2>
+          </div>
+        </div>
+        <ul class="deliv">
+          <li><span class="n">01</span><span><b>Sp&eacute;cialis&eacute;s C&ocirc;te d'Azur</b> &mdash; Le Cannet, Cannes, Nice</span></li>
+          <li><span class="n">02</span><span><b>1 activit&eacute; = 1 site</b> &mdash; approche prouv&eacute;e pour le SEO local</span></li>
+          <li><span class="n">03</span><span><b>Design sur-mesure</b> &mdash; pas de templates g&eacute;n&eacute;riques</span></li>
+          <li><span class="n">04</span><span><b>Accompagnement humain</b> &mdash; disponible et r&eacute;actif</span></li>
+          <li><span class="n">05</span><span><b>Duo compl&eacute;mentaire</b> &mdash; conception (Pac&ocirc;me) + production (Alex)</span></li>
+          <li><span class="n">06</span><span><b>Maquette d&eacute;j&agrave; cr&eacute;&eacute;e</b> &mdash; on t'a montr&eacute; le site, il est pr&ecirc;t</span></li>
+        </ul>
+      </div>
+      <div class="foot"><span>Nos atouts</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 12 PROCHAINES ETAPES -->
+  <section class="stmt" data-label="Prochaines &eacute;tapes">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">On r&eacute;sume</div></div>
+      <div class="fill">
+        <div class="eye" style="color:var(--green);">// La maquette est pr&ecirc;te</div>
+        <p class="big" style="margin-top:28px;">Le site est<br>d&eacute;j&agrave; <span class="ir">design&eacute;</span>.</p>
+        <p class="note" style="max-width:1000px;">Atelier Noona est d&eacute;j&agrave; maquett&eacute;. Tu valides le design, on d&eacute;ploie. Ensuite Maison Mignardise dans la foul&eacute;e &mdash; m&ecirc;me qualit&eacute;, m&ecirc;me approche.</p>
+      </div>
+      <div class="foot"><span>Prochaines &eacute;tapes</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+  <!-- 13 CONTACT -->
+  <section class="contact" data-label="Contact">
+    <div class="layer">
+      <div class="chrome"><div class="mk"><span class="sq"></span>PP IA Agency <em>&times; ADN</em></div><div class="tag">On avance ?</div></div>
+      <div class="fill">
+        <div class="eye" style="color:var(--gold);">// Prochaine &eacute;tape</div>
+        <h2 class="d" style="margin-top:16px;">Valide, on<br>fait le <span class="ir">reste</span>.</h2>
+        <div class="who" style="display:grid;grid-template-columns:1fr 1fr;gap:0 80px;">
+          <div class="r"><div class="role">Conception</div><div class="val big">Pac&ocirc;me Pohi</div></div>
+          <div class="r"><div class="role">Production</div><div class="val big">Alex Quilghini</div></div>
+          <div class="r"><div class="role">Structure</div><div class="val">PP IA Agency</div></div>
+          <div class="r"><div class="role">Structure</div><div class="val">ADN Production</div></div>
+          <div class="r"><div class="role">T&eacute;l&eacute;phone</div><div class="val">07 68 07 06 23</div></div>
+          <div class="r"><div class="role">T&eacute;l&eacute;phone</div><div class="val">06 07 43 33 98</div></div>
+          <div class="r"><div class="role">Email</div><div class="val">pohipacome.pro@gmail.com</div></div>
+          <div class="r"><div class="role">Email</div><div class="val">alex@origines.media</div></div>
+        </div>
+      </div>
+      <div class="foot"><span>PP IA Agency &times; ADN Production</span><span class="pageno"></span></div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+<script src="image-slot.js"></script>
+<script>
+  (function () {
+    var secs = document.querySelectorAll('deck-stage > section');
+    var total = secs.length;
+    secs.forEach(function(s, i) {
+      var p = s.querySelector('.pageno');
+      if (p) p.textContent = String(i + 1).padStart(2, '0') + ' / ' + total;
+      var g = document.createElement('div');
+      g.className = 'grain';
+      s.appendChild(g);
+    });
+  })();
+</script>
+
+</body>
+</html>
